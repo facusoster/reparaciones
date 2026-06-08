@@ -69,7 +69,6 @@ class ReparacionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $request->validate([
             'cliente' => 'required',
             'marca' => 'required',
@@ -78,6 +77,10 @@ class ReparacionController extends Controller
             'fecha_ingreso' => 'required|date',
             'estado' => 'required',
         ]);
+
+        $reparacion = Reparacion::findOrFail($id);
+        $reparacion->update($request->all());
+        return redirect()->route('reparaciones.index');
     }
 
     /**
