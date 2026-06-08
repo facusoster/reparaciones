@@ -169,4 +169,127 @@
             </div>
         </div>
     @endforeach
+
+    <!-- Detail Sidedrawer -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="detailDrawer" aria-labelledby="detailDrawerLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="detailDrawerLabel">
+                <i class="fas fa-eye me-2"></i>Detalle de Reparación
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="detail-content">
+                <div class="detail-section">
+                    <h6 class="detail-section-title">Información del Cliente</h6>
+                    <div class="detail-field">
+                        <label>Nombre</label>
+                        <p id="detail-cliente">-</p>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h6 class="detail-section-title">Información del Dispositivo</h6>
+                    <div class="detail-field">
+                        <label>Marca</label>
+                        <p id="detail-marca">-</p>
+                    </div>
+                    <div class="detail-field">
+                        <label>Modelo</label>
+                        <p id="detail-modelo">-</p>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h6 class="detail-section-title">Detalles de la Reparación</h6>
+                    <div class="detail-field">
+                        <label>Descripción de Falla</label>
+                        <p id="detail-descripcion" style="white-space: pre-wrap;">-</p>
+                    </div>
+                    <div class="detail-field">
+                        <label>Estado</label>
+                        <div id="detail-estado-container"></div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h6 class="detail-section-title">Fechas</h6>
+                    <div class="detail-field">
+                        <label>Fecha de Ingreso</label>
+                        <p id="detail-fecha-ingreso">-</p>
+                    </div>
+                    <div class="detail-field">
+                        <label>Última Actualización</label>
+                        <p id="detail-fecha-actualizacion">-</p>
+                    </div>
+                </div>
+
+                <div class="detail-actions">
+                    <a href="#" id="detail-edit-link" class="btn btn-edit-full">
+                        <i class="fas fa-edit me-2"></i> Editar Reparación
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('detailDrawer').addEventListener('show.bs.offcanvas', function(e) {
+            const button = e.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const cliente = button.getAttribute('data-cliente');
+            const marca = button.getAttribute('data-marca');
+            const modelo = button.getAttribute('data-modelo');
+            const estado = button.getAttribute('data-estado');
+            const descripcion = button.getAttribute('data-descripcion');
+            const fechaIngreso = button.getAttribute('data-fecha-ingreso');
+            const fechaActualizacion = button.getAttribute('data-fecha-actualizacion');
+
+            // Llenar los campos
+            document.getElementById('detail-cliente').textContent = cliente;
+            document.getElementById('detail-marca').textContent = marca;
+            document.getElementById('detail-modelo').textContent = modelo;
+            document.getElementById('detail-descripcion').textContent = descripcion;
+
+            // Formatear y mostrar fechas
+            const fechaIngresoObj = new Date(fechaIngreso);
+            const fechaIngresoFormatted = fechaIngresoObj.toLocaleDateString('es-AR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            
+            const fechaActualizacionObj = new Date(fechaActualizacion);
+            const fechaActualizacionFormatted = fechaActualizacionObj.toLocaleDateString('es-AR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }) + ' ' + fechaActualizacionObj.toLocaleTimeString('es-AR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            document.getElementById('detail-fecha-ingreso').textContent = fechaIngresoFormatted;
+            document.getElementById('detail-fecha-actualizacion').textContent = fechaActualizacionFormatted;
+
+            // Mostrar estado con badge
+            const estadoText = {
+                'completado': 'Completado',
+                'en_proceso': 'En Proceso',
+                'pendiente': 'Pendiente'
+            }[estado] || 'Pendiente';
+
+            const estadoClass = {
+                'completado': 'badge-completado',
+                'en_proceso': 'badge-en-proceso',
+                'pendiente': 'badge-pendiente'
+            }[estado] || 'badge-pendiente';
+
+            document.getElementById('detail-estado-container').innerHTML = 
+                `<span class="badge-estado ${estadoClass}">${estadoText}</span>`;
+
+            // Actualizar enlace de editar
+            document.getElementById('detail-edit-link').href = `{{ route('reparaciones.edit', ':id') }}`.replace(':id', id);
+        });
+    </script>
 @endsection
