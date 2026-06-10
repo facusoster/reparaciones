@@ -133,9 +133,10 @@
                             <select class="form-select @error('estado') is-invalid @enderror" 
                                     id="estado" name="estado" required>
                                 <option value="" disabled>Selecciona un estado</option>
-                                <option value="pendiente" @selected(old('estado', $reparacion->estado) === 'pendiente')>Pendiente</option>
-                                <option value="en_proceso" @selected(old('estado', $reparacion->estado) === 'en_proceso')>En Proceso</option>
-                                <option value="completado" @selected(old('estado', $reparacion->estado) === 'completado')>Completado</option>
+                                <option value="ingresado" @selected(old('estado', $reparacion->estado) === 'ingresado')>Ingresado</option>
+                                <option value="en_reparacion" @selected(old('estado', $reparacion->estado) === 'en_reparacion')>En Reparación</option>
+                                <option value="reparado" @selected(old('estado', $reparacion->estado) === 'reparado')>Reparado</option>
+                                <option value="entregado" @selected(old('estado', $reparacion->estado) === 'entregado')>Entregado</option>
                             </select>
                             @error('estado')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -151,13 +152,17 @@
                     </label>
                     @php
                         $estadoClass = match($reparacion->estado) {
-                            'completado' => 'badge-completado',
-                            'en_proceso' => 'badge-en-proceso',
+                            'entregado' => 'badge-entregado',
+                            'en_reparacion' => 'badge-en-reparacion',
+                            'reparado' => 'badge-reparado',
+                            'ingresado' => 'badge-ingresado',
                             default => 'badge-pendiente'
                         };
                         $estadoText = match($reparacion->estado) {
-                            'completado' => 'Completado',
-                            'en_proceso' => 'En Proceso',
+                            'entregado' => 'Entregado',
+                            'en_reparacion' => 'En Reparación',
+                            'reparado' => 'Reparado',
+                            'ingresado' => 'Ingresado',
                             default => 'Pendiente'
                         };
                     @endphp
