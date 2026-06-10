@@ -46,7 +46,7 @@ class ReparacionSeeder extends Seeder
             'modelo' => 'Pixel 7 Pro',
             'descripcion_falla' => 'El micrófono tiene interferencia',
             'fecha_ingreso' => '2026-06-03',
-            'estado' => 'ingresado',
+            'estado' => 'entregado',
         ]);
 
         Reparacion::create([

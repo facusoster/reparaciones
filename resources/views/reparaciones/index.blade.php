@@ -45,13 +45,17 @@
                                 <td class="td-flex">
                                     @php
                                         $estadoClass = match($reparacion->estado) {
-                                            'completado' => 'badge-completado',
-                                            'en_proceso' => 'badge-en-proceso',
+                                            'entregado' => 'badge-entregado',
+                                            'en_reparacion' => 'badge-en-reparacion',
+                                            'reparado' => 'badge-reparado',
+                                            'ingresado' => 'badge-ingresado',
                                             default => 'badge-pendiente'
                                         };
                                         $estadoText = match($reparacion->estado) {
-                                            'completado' => 'Completado',
-                                            'en_proceso' => 'En Proceso',
+                                            'entregado' => 'Entregado',
+                                            'en_reparacion' => 'En Reparación',
+                                            'reparado' => 'Reparado',
+                                            'ingresado' => 'Ingresado',
                                             default => 'Pendiente'
                                         };
                                     @endphp
@@ -274,14 +278,18 @@
 
             // Mostrar estado con badge
             const estadoText = {
-                'completado': 'Completado',
-                'en_proceso': 'En Proceso',
+                'ingresado': 'Ingresado',
+                'en_reparacion': 'En Reparación',
+                'reparado': 'Reparado',
+                'entregado': 'Entregado',
                 'pendiente': 'Pendiente'
             }[estado] || 'Pendiente';
 
             const estadoClass = {
-                'completado': 'badge-completado',
-                'en_proceso': 'badge-en-proceso',
+                'ingresado': 'badge-ingresado',
+                'en_reparacion': 'badge-en-reparacion',
+                'reparado': 'badge-reparado',
+                'entregado': 'badge-entregado',
                 'pendiente': 'badge-pendiente'
             }[estado] || 'badge-pendiente';
 

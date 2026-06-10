@@ -11,10 +11,19 @@
 </head>
 <body>
     <nav class="navbar navbar-dark sticky-top">
-        <div class="container-fluid">
+        <div class="container-fluid justify-content-between align-items-center d-flex">
             <a class="navbar-brand" href="{{ route('reparaciones.index') }}">
                 <i class="fas fa-mobile-alt"></i> TechRepair
             </a>
+
+            @if(session('authenticated'))
+                <form action="{{ route('logout') }}" method="POST" class="d-flex align-items-center">
+                    @csrf
+                    <button type="submit" class="btn btn-logout">
+                        <i class="fas fa-sign-out-alt me-2"></i> Cerrar sesión
+                    </button>
+                </form>
+            @endif
         </div>
     </nav>
 
