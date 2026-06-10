@@ -42,11 +42,6 @@
 		- [Alta de una reparación](#alta-de-una-reparación)
 	- [Funciones principales del CRUD](#funciones-principales-del-crud)
 	- [Estado final de entrega](#estado-final-de-entrega)
-	- [FAQ App](#faq-app)
-		- [¿Qué datos guarda una reparación?](#qué-datos-guarda-una-reparación)
-		- [¿Qué estados maneja el sistema?](#qué-estados-maneja-el-sistema)
-		- [¿Qué vistas mínimas existen?](#qué-vistas-mínimas-existen)
-		- [¿Cómo se ejecuta en XAMPP?](#cómo-se-ejecuta-en-xampp)
 	- [Conclusión](#conclusión)
 
 ---
@@ -217,32 +212,6 @@ El listado muestra la información más importante para operar rápidamente, mie
 - Vistas Blade separadas por responsabilidad.
 - Estructura lista para defensa del parcial.
 
----
-
-<!-- FAQ:START -->
-## FAQ App
-
-### ¿Qué datos guarda una reparación?
-
-Guarda cliente, marca, modelo, descripción de la falla, fecha de ingreso y estado.
-
-### ¿Qué estados maneja el sistema?
-
-Ingresado, En reparación, Reparado y Entregado.
-
-### ¿Qué vistas mínimas existen?
-
-Las vistas principales del CRUD son index, create, edit y show.
-
-### ¿Cómo se ejecuta en XAMPP?
-
-1. Clonar el repositorio en `C:/xampp/htdocs/` o la ruta deseada.
-2. Crear la base de datos `reparaciones_db` en phpMyAdmin.
-3. Copiar `.env.example` a `.env` y ajustar credenciales.
-4. Ejecutar `composer install`, `php artisan key:generate`, `php artisan migrate --seed` y `php artisan serve`.
-<!-- FAQ:END -->
-
----
 
 ## Conclusión
 
